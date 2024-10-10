@@ -25,21 +25,7 @@
 WORKING_DIR=$PWD
 
 function setup_environment() {
-  source scl_source enable devtoolset-8
-  source scl_source enable rh-python38
-  if [[ -z "${PYTHON_VERSION}" ]]; then
-    echo "Must set PYTHON_VERSION env to 39|310|311"; exit 1;
-  fi
-  # Bazel will use PYTHON_BIN_PATH to determine the right python library.
-  if [[ "${PYTHON_VERSION}" == 39 ]]; then
-    PYTHON_DIR=/opt/python/cp39-cp39
-  elif [[ "${PYTHON_VERSION}" == 310 ]]; then
-    PYTHON_DIR=/opt/python/cp310-cp310
-  elif [[ "${PYTHON_VERSION}" == 311 ]]; then
-    PYTHON_DIR=/opt/python/cp311-cp311
-  else
-    echo "Must set PYTHON_VERSION env to 39|310|311"; exit 1;
-  fi
+  PYTHON_DIR=/usr/local
   export PIP_BIN="${PYTHON_DIR}"/bin/pip
   export PYTHON_BIN_PATH="${PYTHON_DIR}"/bin/python
   echo "PYTHON_BIN_PATH=${PYTHON_BIN_PATH}"
@@ -48,6 +34,7 @@ function setup_environment() {
   ${PIP_BIN} install wheel --upgrade
   ${PIP_BIN} install "numpy>=2.0" --force
   ${PIP_BIN} install auditwheel
+  ${PIP_BIN} install patchelf
 }
 
 function build_wheel() {
@@ -58,7 +45,7 @@ function build_wheel() {
 function stamp_wheel() {
   WHEEL_PATH="$(ls "$PWD"/dist/*.whl)"
   WHEEL_DIR=$(dirname "${WHEEL_PATH}")
-  auditwheel repair --plat manylinux2014_x86_64 -w "${WHEEL_DIR}" "${WHEEL_PATH}"
+  auditwheel -v repair --plat linux_aarch64 -w "${WHEEL_DIR}" "${WHEEL_PATH}"
   rm "${WHEEL_PATH}"
 }
 

@@ -7,9 +7,9 @@ genrule(
     srcs = ["cpp/src/arrow/util/config.h.cmake"],
     outs = ["cpp/src/arrow/util/config.h"],
     cmd = ("sed " +
-           "-e 's/@ARROW_VERSION_MAJOR@/6/g' " +
+           "-e 's/@ARROW_VERSION_MAJOR@/14/g' " +
            "-e 's/@ARROW_VERSION_MINOR@/0/g' " +
-           "-e 's/@ARROW_VERSION_PATCH@/1/g' " +
+           "-e 's/@ARROW_VERSION_PATCH@/2/g' " +
            "-e 's/cmakedefine/define/g' " +
            "$< >$@"),
 )
@@ -66,6 +66,7 @@ cc_library(
             "cpp/src/arrow/util/compression_lz4*",
             "cpp/src/arrow/util/compression_z*",
             "cpp/src/arrow/util/compression_snappy*",
+            "cpp/src/arrow/util/tracing_internal.cc",
             "cpp/src/arrow/**/*test*",
             "cpp/src/arrow/**/*benchmark*.cc",
             "cpp/src/arrow/**/*hdfs*.cc",
@@ -76,12 +77,16 @@ cc_library(
             "cpp/src/arrow/ipc/file-to-stream.cc",
             "cpp/src/arrow/vendored/xxhash/**",
             "cpp/src/arrow/vendored/datetime/**",
+            "cpp/src/arrow/compute/*_avx2.cc",
+            "cpp/src/arrow/compute/**/*_avx2.cc",
+            "cpp/src/arrow/memory_pool_jemalloc.cc",
         ],
     ),
     hdrs = glob([
         "cpp/src/arrow/*.h",
         "cpp/src/arrow/array/*.h",
         "cpp/src/arrow/c/*.h",
+        "cpp/src/arrow/compute/*.h",
         "cpp/src/arrow/compute/**/*.h",
         "cpp/src/arrow/tensor/*.h",
         "cpp/src/arrow/util/**/*.h",

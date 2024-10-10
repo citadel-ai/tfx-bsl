@@ -56,7 +56,7 @@ protobuf_deps()
 
 # Use the last commit on the relevant release branch to update.
 # LINT.IfChange(arrow_archive_version)
-ARROW_COMMIT = "347a88ff9d20e2a4061eec0b455b8ea1aa8335dc"  # 6.0.1
+ARROW_COMMIT = "740889f413af9b1ae1d81eb1e5a4a9fb4ce9cf97"  # 14.0.2
 # LINT.ThenChange(third_party/arrow.BUILD:arrow_gen_version)
 
 # `shasum -a 256` can be used to get `sha256` from the downloaded archive on
@@ -65,7 +65,7 @@ http_archive(
     name = "arrow",
     build_file = "//third_party:arrow.BUILD",
     strip_prefix = "arrow-%s" % ARROW_COMMIT,
-    sha256 = "55fc466d0043c4cce0756bc18e1e62b3233be74c9afe8dc0d18420b9a5fd9714",
+    sha256 = "83f64e6116a268cfd84a0d11f0921860ef413df0e9baa96f1634c185dfcc3fef",
     urls = ["https://github.com/apache/arrow/archive/%s.zip" % ARROW_COMMIT],
     patches = ["//third_party:arrow.patch"],
 )
@@ -102,13 +102,13 @@ http_archive(
     ],
 )
 
-PYBIND11_COMMIT = "8a099e44b3d5f85b20f05828d919d2332a8de841"  # 2.11.1
+PYBIND11_COMMIT = "2e0815278cb899b20870a67ca8205996ef47e70f"  # 2.12.1
 http_archive(
   name = "pybind11",
   build_file = "//third_party:pybind11.BUILD",
   strip_prefix = "pybind11-%s" % PYBIND11_COMMIT,
   urls = ["https://github.com/pybind/pybind11/archive/%s.zip" % PYBIND11_COMMIT],
-  sha256 = "8f4b7f28d214e36301435c055076c36186388dc9617117802cba8a059347cb00",
+  sha256 = "1a38cf9cd13f089e6c1c8a1f366766a82eb7dd6cb483ab50ae80760911043162",
 )
 
 load("//third_party:python_configure.bzl", "local_python_configure")
