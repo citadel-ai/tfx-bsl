@@ -24,3 +24,10 @@ services:
       dockerfile: tfx_bsl/tools/docker_build/Dockerfile.manylinux2010
     volumes:
       - .:/build:delegated
+  debian:
+    image: tfx-bsl-build:debian
+    build:
+      context: .
+      dockerfile: tfx_bsl/tools/docker_build/Dockerfile.debian
+    volumes:
+      - .:/build:delegated
