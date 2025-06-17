@@ -43,7 +43,7 @@ function setup_environment() {
   export PYTHON_BIN_PATH="${PYTHON_DIR}/bin/python"
   pip3 install --upgrade pip setuptools
   pip3 install wheel
-  pip3 install "numpy~=1.22.0" --force
+  pip3 install "numpy>=2.0" --force
   pip3 install auditwheel
 }
 
@@ -63,5 +63,6 @@ function stamp_wheel() {
 set -x
 setup_environment && \
 build_wheel && \
-stamp_wheel
+# stamp_wheel
+bazel clean --expunge
 set +x

@@ -22,3 +22,10 @@ services:
       dockerfile: tfx_bsl/tools/docker_build/Dockerfile.manylinux2010
     volumes:
       - .:/build:delegated
+  manylinux-aarch64:
+    image: tfx-bsl-build:manylinux_aarch64
+    build:
+      context: .
+      dockerfile: tfx_bsl/tools/docker_build/Dockerfile.manylinux_aarch64
+    volumes:
+      - .:/build:delegated
