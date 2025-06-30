@@ -1,8 +1,8 @@
 diff --git tensorflow/core/example/BUILD tensorflow/core/example/BUILD
-index 4527044f383..2d61de25200 100644
+index b9b3645f0df..2d61de25200 100644
 --- tensorflow/core/example/BUILD
 +++ tensorflow/core/example/BUILD
-@@ -1,187 +1,14 @@
+@@ -1,184 +1,14 @@
 -load(
 -    "@io_bazel_rules_closure//closure:defs.bzl",
 -    "closure_proto_library",
@@ -116,7 +116,6 @@ index 4527044f383..2d61de25200 100644
          "example.proto",
          "feature.proto",
      ],
--    cc_api_version = 2,
 -    make_default_target_header_only = True,
 -    tags = ["alt_dep=//third_party/tensorflow/core:protos_all"],
 +    visibility = ["//visibility:public"],
@@ -125,7 +124,6 @@ index 4527044f383..2d61de25200 100644
 -tf_proto_library(
 -    name = "example_parser_configuration_proto",
 -    srcs = ["example_parser_configuration.proto"],
--    cc_api_version = 2,
 -    make_default_target_header_only = True,
 -    protodeps = [
 -        "//tensorflow/core/framework:tensor_shape_proto",
@@ -136,7 +134,6 @@ index 4527044f383..2d61de25200 100644
 -
 -tf_proto_library(
 -    name = "protos_all",
--    cc_api_version = 2,
 -    make_default_target_header_only = True,
 -    protodeps = [
 -        ":example_protos",

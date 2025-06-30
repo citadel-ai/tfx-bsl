@@ -75,9 +75,18 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
+MIMALLOC_COMMIT = "a3070dc57fa03a43cae9079a2a879a66cec8f715"  # 2.1.9
+http_archive(
+    name = "mimalloc",
+    urls = ["https://github.com/microsoft/mimalloc/archive/%s.zip" % MIMALLOC_COMMIT],
+    sha256 = "d2a18846685e41a5609105aa06915a5271994939dc303212cf89010f72825b82",
+    strip_prefix = "mimalloc-%s" % MIMALLOC_COMMIT,
+    build_file = "//third_party:mimalloc.BUILD"
+)
+
 # Use the last commit on the relevant release branch to update.
 # LINT.IfChange(arrow_archive_version)
-ARROW_COMMIT = "347a88ff9d20e2a4061eec0b455b8ea1aa8335dc"  # 6.0.1
+ARROW_COMMIT = "7dd1d34074af176d9e861a360e135ae57b21cf96"  # 16.1.0
 # LINT.ThenChange(third_party/arrow.BUILD:arrow_gen_version)
 
 # `shasum -a 256` can be used to get `sha256` from the downloaded archive on
@@ -86,7 +95,7 @@ http_archive(
     name = "arrow",
     build_file = "//third_party:arrow.BUILD",
     patches = ["//third_party:arrow.patch"],
-    sha256 = "55fc466d0043c4cce0756bc18e1e62b3233be74c9afe8dc0d18420b9a5fd9714",
+    sha256 = "9573929b7b70e7ae911ea213336847ba7c5d853bcaff7206e9eb45ce709b6d49",
     strip_prefix = "arrow-%s" % ARROW_COMMIT,
     urls = ["https://github.com/apache/arrow/archive/%s.zip" % ARROW_COMMIT],
 )
@@ -111,26 +120,26 @@ http_archive(
 
 # TODO(b/177694034): Follow the new format for tensorflow import after TF 2.5.
 #here
-TENSORFLOW_COMMIT = "3c92ac03cab816044f7b18a86eb86aa01a294d95"  # 2.17.1
+TENSORFLOW_COMMIT = "6550e4bd80223cdb8be6c3afd1f81e86a4d433c3"  # 2.18.0
 
 http_archive(
     name = "org_tensorflow_no_deps",
     patches = [
         "//third_party:tensorflow_expose_example_proto.patch",
     ],
-    sha256 = "317dd95c4830a408b14f3e802698eb68d70d81c7c7cfcd3d28b0ba023fe84a68",
+    sha256 = "403916fbcfcbd5657cd891a871debc72433d7a8c56760297a79085e1abc8f18a",
     strip_prefix = "tensorflow-%s" % TENSORFLOW_COMMIT,
     urls = [
         "https://github.com/tensorflow/tensorflow/archive/%s.tar.gz" % TENSORFLOW_COMMIT,
     ],
 )
 
-PYBIND11_COMMIT = "8a099e44b3d5f85b20f05828d919d2332a8de841"  # 2.11.1
+PYBIND11_COMMIT = "2e0815278cb899b20870a67ca8205996ef47e70f"  # 2.12.1
 
 http_archive(
     name = "pybind11",
     build_file = "//third_party:pybind11.BUILD",
-    sha256 = "8f4b7f28d214e36301435c055076c36186388dc9617117802cba8a059347cb00",
+    sha256 = "1a38cf9cd13f089e6c1c8a1f366766a82eb7dd6cb483ab50ae80760911043162",
     strip_prefix = "pybind11-%s" % PYBIND11_COMMIT,
     urls = ["https://github.com/pybind/pybind11/archive/%s.zip" % PYBIND11_COMMIT],
 )
