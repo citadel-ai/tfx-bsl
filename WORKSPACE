@@ -75,11 +75,11 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
-MIMALLOC_COMMIT = "a3070dc57fa03a43cae9079a2a879a66cec8f715"  # 2.1.9
+MIMALLOC_COMMIT = "fbd8b99c2b828428947d70fdc046bb55609be93e"  # 2.2.4
 http_archive(
     name = "mimalloc",
     urls = ["https://github.com/microsoft/mimalloc/archive/%s.zip" % MIMALLOC_COMMIT],
-    sha256 = "d2a18846685e41a5609105aa06915a5271994939dc303212cf89010f72825b82",
+    sha256 = "5f5c855ab33dcdba5790db3603da3f6d46b1e29e5e88ffa855e48a498a5bf74f",
     strip_prefix = "mimalloc-%s" % MIMALLOC_COMMIT,
     build_file = "//third_party:mimalloc.BUILD"
 )
